@@ -1,0 +1,33 @@
+﻿@using BlazorEcommerceMiniShop.Client.Services.ProductService
+@using BlazorEcommerceMiniShop.Shared
+@inject IProductService ProductService
+
+<ul class="list-unstyled">
+    @foreach(var product in ProductService.Products)
+    {
+        <li class="media my-3">
+            <div class="media-img-wrapper mx-2 mb-2">
+                <a href="#">
+                    <img class="media-img" src="@product.ImageUrl" alt="@product.Title" />
+                </a>
+            </div>
+            <div class="media-Body">
+                <a href="#">
+                    <h4 class="mb-0">@product.Title</h4>
+                </a>
+                <p>@product.Description</p>
+                <h5 class="price">$@product.Price</h5>
+
+            </div>
+        </li>
+    }
+</ul>
+
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await ProductService.GetProducts();
+    }
+
+}
